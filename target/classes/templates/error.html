@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>404 - Page Not Found</title>
+  <style>
+    /* Resetting default styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #1e1e1e;
+      color: #fff;
+      font-family: 'Arial', sans-serif;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      overflow: hidden;
+      position: relative;
+    }
+
+    h1 {
+      font-size: 8rem;
+      letter-spacing: -10px;
+      font-weight: bold;
+      text-transform: uppercase;
+      color: #f44336;
+      margin: 0;
+      opacity: 0.9;
+    }
+
+    .message {
+      font-size: 1.5rem;
+      margin-top: 20px;
+      color: #bbb;
+      text-align: center;
+    }
+
+    .explosion {
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      background-color: rgba(255, 69, 58, 0.6);
+      border-radius: 50%;
+      animation: explosion 2s infinite ease-in-out;
+      opacity: 0.2;
+    }
+
+    .explosion:nth-child(1) {
+      animation-delay: 0s;
+    }
+
+    .explosion:nth-child(2) {
+      animation-delay: 0.5s;
+    }
+
+    .explosion:nth-child(3) {
+      animation-delay: 1s;
+    }
+
+    .explosion:nth-child(4) {
+      animation-delay: 1.5s;
+    }
+
+    /* Animation for explosion */
+    @keyframes explosion {
+      0% {
+        transform: scale(0);
+        opacity: 0.2;
+      }
+      50% {
+        transform: scale(1.5);
+        opacity: 0.8;
+      }
+      100% {
+        transform: scale(0);
+        opacity: 0;
+      }
+    }
+
+    .button {
+      padding: 12px 30px;
+      margin-top: 30px;
+      font-size: 1.2rem;
+      background-color: #f44336;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .button:hover {
+      background-color: #d32f2f;
+    }
+
+    .button:focus {
+      outline: none;
+    }
+
+    /* Cool animation for "back to home" button */
+    .button:active {
+      transform: translateY(2px);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    }
+  </style>
+</head>
+<body>
+<!-- Animated Explosion -->
+<div class="explosion" style="top: 10%; left: 20%;"></div>
+<div class="explosion" style="top: 20%; left: 60%;"></div>
+<div class="explosion" style="top: 50%; left: 30%;"></div>
+<div class="explosion" style="top: 70%; left: 80%;"></div>
+
+<!-- Error message -->
+<h1>404</h1>
+<div class="message">
+  Oops! It seems you've taken a wrong turn.<br>
+  This page doesn't exist.
+</div>
+
+<!-- Button to go back to homepage -->
+<button class="button" onclick="goHome()">Go Home</button>
+
+<script>
+  // Function to navigate back to homepage
+  function goHome() {
+    window.location.href = '/';  // Redirects to the home page (you can change this if needed)
+  }
+</script>
+</body>
+</html>

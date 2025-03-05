@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f9;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #3498db;
+            color: white;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn {
+            background-color: #3498db;
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            display: inline-block;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #2980b9;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        input[type="text"], input[type="email"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+
+        .form-actions {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .form-actions button {
+            background-color: #3498db;
+            color: white;
+            padding: 12px 25px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .form-actions button:hover {
+            background-color: #2980b9;
+        }
+
+        .form-actions input[type="text"] {
+            width: 50%;
+            margin-right: 10px;
+        }
+
+        .form-actions .btn {
+            margin-left: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+            }
+
+            .form-actions input[type="text"] {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            .form-actions button {
+                width: 100%;
+                margin-top: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>List of Users</h1>
+
+    <!-- Home button -->
+    <a href="/" class="btn">Home</a>
+
+    <!-- Form to add a new user -->
+    <form action="/api/users/create" method="post">
+        <div class="form-group">
+            <input type="text" name="name" placeholder="Enter your name" required>
+        </div>
+        <div class="form-group">
+            <input type="email" name="email" placeholder="Enter email" required>
+        </div>
+        <div class="form-group">
+            <input type="password" name="password" placeholder="Enter password" required>
+        </div>
+        <div class="form-actions">
+            <button type="submit">Add User</button>
+        </div>
+        <input type="hidden" name="_csrf" value="${_csrf.token}"/>
+    </form>
+
+    <form action="/api/users/deleteUser" method="post" style="margin-top: 30px;">
+        <div class="form-group">
+            <!-- Use 'id' to match the controller's parameter -->
+            <input type="text" name="id" placeholder="Enter the User ID" required>
+        </div>
+        <div class="form-actions">
+            <button type="submit">Delete User</button>
+        </div>
+
+        <!-- CSRF token for security -->
+        <input type="hidden" name="_csrf" value="${_csrf.token}"/>
+
+        <!-- Use hidden method to simulate DELETE request -->
+        <input type="hidden" name="_method" value="DELETE"/>
+    </form>
+
+
+
+
+    <!-- Table displaying users -->
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${users}">
+            <td th:text="${user.id}"></td>
+            <td th:text="${user.name}"></td>
+            <td th:text="${user.email}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
